@@ -6,6 +6,7 @@ import { useRef } from 'react';
 import Button from './Button';
 import AnimatedTitle from './AnimatedTitle';
 import Image from 'next/image';
+import RoundedCorners from './RoundedCorners';
 
 const Story = () => {
 	const frameRef = useRef(null);
@@ -73,38 +74,13 @@ const Story = () => {
 									src='/img/entrance.webp'
 									alt='entrance.webp'
 									className='object-contain'
-									width={1000}
-									height={1000}
+									fill
 								/>
 							</div>
 						</div>
 
 						{/* for the rounded corner */}
-						<svg
-							className='invisible absolute size-0'
-							xmlns='http://www.w3.org/2000/svg'
-						>
-							<defs>
-								<filter id='flt_tag'>
-									<feGaussianBlur
-										in='SourceGraphic'
-										stdDeviation='8'
-										result='blur'
-									/>
-									<feColorMatrix
-										in='blur'
-										mode='matrix'
-										values='1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9'
-										result='flt_tag'
-									/>
-									<feComposite
-										in='SourceGraphic'
-										in2='flt_tag'
-										operator='atop'
-									/>
-								</filter>
-							</defs>
-						</svg>
+						<RoundedCorners />
 					</div>
 				</div>
 
