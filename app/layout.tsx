@@ -35,7 +35,7 @@ const robertRegular = localFont({
 });
 
 const zentry = localFont({
-	src: './fonts/zentry.woff2',
+	src: './fonts/zentry-regular.woff2',
 	variable: '--font-zentry',
 	weight: '100 900',
 });

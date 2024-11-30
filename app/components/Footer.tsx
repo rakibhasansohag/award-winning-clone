@@ -43,8 +43,8 @@ const Footer = () => {
 			<div className='container mx-auto flex flex-col items-center justify-between gap-4 px-4 md:flex-row'>
 				<p className='text-center text-sm font-light md:text-left flex justify-stretch'>
 					<span>Rakib {fullYear}. No copy right & </span>
-					{'  '}
-					<span className='font-bold'> {quote}</span>
+
+					<span className='font-bold ml-1'> {quote}</span>
 				</p>
 
 				<div className='flex justify-center gap-4  md:justify-start'>
