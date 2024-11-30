@@ -20,10 +20,10 @@ const Hero = () => {
 	const [loadedVideos, setLoadedVideos] = useState(0);
 
 	const totalVideos = 4;
-	// const nextVideoRef = useRef(null);
 	const nextVideoRef = useRef<HTMLVideoElement | null>(null);
+	const cardRef = useRef<HTMLDivElement | null>(null);
 
-	// Calculate the index of the upcoming video by taking the remainder of the current index divided by the total number of videos, then adding 1 :
+	// Calculate the index of the upcoming video by taking the remainder of the current index divided by the total number of videos, then adding 1:
 	const upcomingVideoIndex = (currentIndex % totalVideos) + 1;
 
 	const handledVideoLoad = () => {
@@ -32,7 +32,7 @@ const Hero = () => {
 	};
 
 	useEffect(() => {
-		console.log('Loaded VIdeows : ', loadedVideos);
+		console.log('Loaded Videos: ', loadedVideos);
 		if (loadedVideos === totalVideos - 1) {
 			setIsLoading(false);
 		}
@@ -40,7 +40,6 @@ const Hero = () => {
 
 	const handleMiniVideoClick = () => {
 		setHasClicked(true);
-
 		setCurrentIndex(upcomingVideoIndex);
 	};
 
@@ -95,6 +94,30 @@ const Hero = () => {
 		});
 	});
 
+	//Point: Mouse interaction for moving the card
+	const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+		const { clientX, clientY } = e;
+		const { offsetWidth, offsetHeight } = e.currentTarget;
+
+		// Point: Check if the mouse is over a button and exclude it from the interaction
+		const isOverButton =
+			e.target instanceof HTMLElement && e.target.closest('button');
+		if (isOverButton) return;
+
+		// Calculate position within container
+		const x = clientX - offsetWidth / 2;
+		const y = clientY - offsetHeight / 2;
+
+		if (cardRef.current) {
+			gsap.to(cardRef.current, {
+				x,
+				y,
+				duration: 0.4,
+				ease: 'power1.out',
+			});
+		}
+	};
+
 	const getVideoSource = (index: number) => {
 		const videoSource = `videos/hero-${index}.mp4`;
 		console.log(`Loading video: ${videoSource}`);
@@ -104,7 +127,10 @@ const Hero = () => {
 	console.log(isLoading);
 
 	return (
-		<div className='relative h-dvh w-screen overflow-x-hidden'>
+		<div
+			className='relative h-dvh w-screen overflow-x-hidden'
+			onMouseMove={handleMouseMove}
+		>
 			{isLoading && (
 				<div className='flex-center absolute z-[100] h-dvh w-screen overflow-hidden bg-violet-50'>
 					{/* https://uiverse.io/G4b413l/tidy-walrus-92 */}
@@ -121,7 +147,10 @@ const Hero = () => {
 				className='relative z-10 h-dvh w-screen overflow-hidden rounded-lg bg-blue-75'
 			>
 				<div>
-					<div className='mask-clip-path absolute-center absolute z-50 size-64 cursor-pointer overflow-hidden rounded-lg'>
+					<div
+						ref={cardRef}
+						className='mask-clip-path absolute-center absolute z-50 size-64 cursor-pointer overflow-hidden rounded-lg'
+					>
 						<VideoPreview>
 							<div
 								onClick={handleMiniVideoClick}
