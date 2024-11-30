@@ -25,7 +25,7 @@ export const BentoTilt = ({ children, className = '' }: Props) => {
 		const tiltX = (relativeY - 0.5) * 5;
 		const tiltY = (relativeX - 0.5) * -5;
 
-		const newTransform = `perspective(700px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(.95, .95, .95)`;
+		const newTransform = `perspective(700px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(.98, .98, .98)`;
 		setTransformStyle(newTransform);
 	};
 
@@ -121,7 +121,7 @@ export const BentoCard = ({
 };
 
 const Features = () => (
-	<section className='bg-black pb-52'>
+	<section className='bg-black pb-52' id='nexus'>
 		<div className='container mx-auto px-3 md:px-10'>
 			<div className='px-5 py-32'>
 				<p className='font-circular-web text-lg text-blue-50'>
